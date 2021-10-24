@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'ajax_select',
+    'taggit',
+    'taggit_serializer',
 
     # local
     'user',
