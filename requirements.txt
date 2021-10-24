@@ -10,7 +10,10 @@ coreschema==0.0.4
 cryptography==35.0.0
 defusedxml==0.7.1
 Django==3.2.8
+django-ajax-selects==2.1.0
+django-ckeditor==6.1.0
 django-cors-headers==3.10.0
+django-js-asset==1.2.2
 django-templated-mail==1.1.1
 djangorestframework==3.12.4
 djangorestframework-jwt==1.11.0
@@ -27,6 +30,7 @@ marshmallow==3.14.0
 mccabe==0.6.1
 oauthlib==3.1.1
 pep8==1.7.1
+Pillow==8.4.0
 platformdirs==2.4.0
 pycodestyle==2.8.0
 pycparser==2.20

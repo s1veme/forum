@@ -51,9 +51,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'ckeditor',
+    'ckeditor_uploader',
+    'ajax_select',
 
     # local
     'user',
+    'posts',
 
 ]
 
@@ -173,4 +177,16 @@ REST_USE_JWT = True
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=14),
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+}
+
+# CKEDITOR SETTINGS
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
 }
