@@ -5,12 +5,16 @@ from taggit_serializer.serializers import (
     TaggitSerializer
 )
 
-from .models import Post
+from .models import (
+    Answer,
+    Post
+)
 
 
 class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
 
     tags = TagListSerializerField()
+    answers = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -18,7 +22,23 @@ class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
             'id',
             'title',
             'content',
-            'tags',
             'owner',
-            'timestamp'
+            'tags',
+            'answers',
+        ]
+
+    @staticmethod
+    def get_answers(obj):
+        return AnswerSerializer(Answer.objects.filter(post=obj), many=True).data
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Answer
+        fields = [
+            'id',
+            'content',
+            'owner',
+            'post',
         ]
