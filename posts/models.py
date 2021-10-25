@@ -32,11 +32,6 @@ class Post(models.Model):
     content = RichTextUploadingField(
         'Контент поста'
     )
-    preview = models.ImageField(
-        'Превью',
-        upload_to='post-image',
-        default='default.png'
-    )
     owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE

@@ -16,5 +16,6 @@ urlpatterns = [
     path('ajax_select/', include(ajax_select_urls)),
 
     # local
-    path('api/user/', include('user.urls'))
+    path('api/user/', include('user.urls')),
+    path('api/posts/', include('posts.urls')),
 ]

@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 @register('user')
-class ThingsLookup(LookupChannel):
+class UserLookup(LookupChannel):
 
     model = User
 

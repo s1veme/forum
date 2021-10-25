@@ -14,6 +14,8 @@ django-ajax-selects==2.1.0
 django-ckeditor==6.1.0
 django-cors-headers==3.10.0
 django-js-asset==1.2.2
+django-taggit==1.5.1
+django-taggit-serializer==0.1.7
 django-templated-mail==1.1.1
 djangorestframework==3.12.4
 djangorestframework-jwt==1.11.0
