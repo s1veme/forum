@@ -1,7 +1,8 @@
 from rest_framework import status
 from rest_framework.generics import (
     CreateAPIView,
-    ListAPIView
+    ListAPIView,
+    RetrieveAPIView
 )
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -59,3 +60,9 @@ class AnswerCreateAPIView(CreateAPIView):
         self.perform_create(serializer)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class AnswerRetrieveAPIView(RetrieveAPIView):
+    queryset = Answer.objects.filter(is_active=True)
+    serializer_class = AnswerSerializer
+    permission_classes = [AllowAny]

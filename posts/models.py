@@ -21,6 +21,9 @@ class Post(models.Model):
         auto_now_add=True
     )
     tags = TaggableManager()
+    is_active = models.BooleanField(
+        default=True
+    )
 
     def __str__(self):
         return self.title
@@ -35,9 +38,13 @@ class Answer(models.Model):
     timestamp = models.DateTimeField(
         auto_now_add=True
     )
-    post = models.ManyToManyField(
-        Post
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+    )
+    is_active = models.BooleanField(
+        default=True
     )
 
     def __str__(self):
-        return self.content
+        return self.owner.email
