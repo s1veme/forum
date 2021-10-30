@@ -52,6 +52,7 @@ class PostListAPIView(ListAPIView):
     queryset = Post.objects.filter(is_active=True)
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
+    pagination_class = PostPagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = ('tags__name',)
 
