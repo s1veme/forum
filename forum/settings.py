@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     # local
     'user',
     'posts',
+    'news',
 
 ]
 
