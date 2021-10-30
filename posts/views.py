@@ -8,6 +8,7 @@ from rest_framework.permissions import (
     AllowAny
 )
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 
 from django_filters import rest_framework as filters
 
@@ -22,6 +23,12 @@ from .serializers import (
     AnswerSerializer,
     PostSerializer
 )
+
+
+class PostPagination(PageNumberPagination):
+    page_size = 30
+    page_size_query_param = "post_len"
+    max_page_size = 60
 
 
 class PostCreateAPIView(CreateAPIView):
