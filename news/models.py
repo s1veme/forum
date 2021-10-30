@@ -12,6 +12,13 @@ class Category(models.Model):
         max_length=248
     )
 
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
+
 
 class News(models.Model):
     title = models.CharField(
@@ -33,6 +40,10 @@ class News(models.Model):
         auto_now_add=True
     )
     # todo: comments
+
+    class Meta:
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
 
     def __str__(self):
         return self.title

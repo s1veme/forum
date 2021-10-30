@@ -18,4 +18,5 @@ urlpatterns = [
     # local
     path('api/user/', include('user.urls')),
     path('api/posts/', include('posts.urls')),
+    path('api/news/', include('news.urls')),
 ]
