@@ -13,6 +13,7 @@ Django==3.2.8
 django-ajax-selects==2.1.0
 django-ckeditor==6.1.0
 django-cors-headers==3.10.0
+django-filter==21.1
 django-js-asset==1.2.2
 django-taggit==1.5.1
 django-taggit-serializer==0.1.7

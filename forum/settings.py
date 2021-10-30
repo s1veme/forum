@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'ajax_select',
     'taggit',
     'taggit_serializer',
+    'django_filters',
 
     # local
     'user',
@@ -183,9 +184,12 @@ JWT_AUTH = {
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ]
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    )
 }
 
 

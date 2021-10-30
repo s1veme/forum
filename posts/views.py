@@ -6,10 +6,11 @@ from rest_framework.generics import (
 )
 from rest_framework.permissions import (
     IsAuthenticated,
-    IsAuthenticatedOrReadOnly,
     AllowAny
 )
 from rest_framework.response import Response
+
+from django_filters import rest_framework as filters
 
 from .models import (
     Answer,
@@ -23,7 +24,7 @@ from .serializers import (
 
 
 class PostCreateAPIView(CreateAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(is_active=True)
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
 
@@ -40,13 +41,15 @@ class PostCreateAPIView(CreateAPIView):
 
 
 class PostListAPIView(ListAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(is_active=True)
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('tags__name',)
 
 
 class AnswerCreateAPIView(CreateAPIView):
-    queryset = Answer.objects.all()
+    queryset = Answer.objects.filter(is_active=True)
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
 
