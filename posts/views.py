@@ -5,12 +5,13 @@ from rest_framework.generics import (
     RetrieveAPIView
 )
 from rest_framework.permissions import (
-    IsAuthenticated,
     AllowAny
 )
 from rest_framework.response import Response
 
 from django_filters import rest_framework as filters
+
+from .permissions import IsAuthenticatedAndOwnerOrReadOnly
 
 from .models import (
     Answer,
@@ -26,7 +27,7 @@ from .serializers import (
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.filter(is_active=True)
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedAndOwnerOrReadOnly]
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
@@ -51,7 +52,7 @@ class PostListAPIView(ListAPIView):
 class AnswerCreateAPIView(CreateAPIView):
     queryset = Answer.objects.filter(is_active=True)
     serializer_class = AnswerSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedAndOwnerOrReadOnly]
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
