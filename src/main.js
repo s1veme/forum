@@ -1,8 +1,10 @@
-console.log('aaa');
-const aaa = 1;
-console.log('bbbb');
+import css from '../css/index.scss'
+import { user } from './user'
 
 
 
-console.log('1');
-console.log('ура')
+const startApp = () => {
+    user()
+}
+
+startApp()
