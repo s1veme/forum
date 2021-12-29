@@ -1,6 +1,6 @@
 import axios from "axios";
 import requests from "./api/requests";
-import { openModal } from "./api/requests/modal";
+import { openModal } from "./modal";
 
 const userBlock = document.querySelector(".user");
 

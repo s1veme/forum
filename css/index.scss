@@ -1,18 +1,47 @@
+$text: #334155;
+$buttons: #334155;
+$orange: #ea580c;
+@font-face {
+  font-family: "Rubik";
+  src: url("../assets/fonts/rubic/Rubik-VariableFont_wght.ttf") format("ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-header {
+body {
+  background-blend-mode: screen;
+  background: linear-gradient(limegreen, transparent),
+    linear-gradient(90deg, skyblue, transparent),
+    linear-gradient(-90deg, coral, transparent);
+}
+.header {
+  border-bottom: 1px solid black;
+  background-color: #383b40;
   padding: 20px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &__logo {
+    color: white;
+    font-family: "Rubik";
+    font-size: 20px;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .user {
   .user__img {
+    background-color: white;
     cursor: pointer;
     padding: 4px;
     border: 1px solid grey;
@@ -23,7 +52,7 @@ header {
 }
 
 .modal {
-  width: 20%;
+  width: 300px;
   position: fixed;
   right: 20px;
   display: none;
@@ -40,17 +69,17 @@ header {
 
   &__content {
     padding: 10px 15px;
-    box-shadow: 0 0 4px 1px rgb(173, 173, 173);
-    cursor: pointer;
-    background-color: white;
 
+    cursor: pointer;
+
+    text-align: center;
     border-radius: 20px;
     top: 80px;
     .login {
       margin: 10px 0px;
       border-radius: 15px;
       width: 100%;
-      background-color: rgb(5, 5, 100);
+      background-color: $buttons;
       padding: 20px;
       color: white;
       display: none;
@@ -59,10 +88,60 @@ header {
       margin: 0 10px;
       border-radius: 15px;
       width: 100%;
-      background-color: rgb(1, 1, 59);
+      background-color: $buttons;
       padding: 20px;
       color: white;
       display: none;
+    }
+  }
+}
+
+.questions {
+  width: 100%;
+
+  padding: 0px 30px;
+  .question {
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: -20px 20px 0 -17px inherit, 20px -20px 0 -17px inherit,
+      20px 20px 0 -20px #592385, 0 0 0 2px #592385;
+
+    font-family: "Rubik", sans-serif;
+
+    width: 100%;
+    padding: 15px;
+    margin: 20px auto;
+
+    & a {
+      display: block;
+      color: black;
+      text-decoration: none;
+
+      transition: all 0.3s;
+      &:hover {
+        color: $orange;
+      }
+    }
+
+    &__title {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    &__author {
+      font-size: 22px;
+    }
+
+    &__text {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+    &__button_wrap {
+      margin-top: 20px;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 }

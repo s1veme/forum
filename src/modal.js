@@ -12,12 +12,12 @@ const openModal = (e) => {
       [
         { top: "80px", opacity: 1 },
         {
-          top: "130px",
+          top: "-130px",
           opacity: 0,
         },
       ],
       {
-        duration: 300,
+        duration: 200,
         fill: "forwards",
         direction,
       }
@@ -28,8 +28,8 @@ const openModal = (e) => {
       modal.classList.remove("open");
     });
   } else {
-      modal.classList.add('open')
-    toggleAnim(modal, "reverse")
+    modal.classList.add("open");
+    toggleAnim(modal, "reverse");
   }
 };
 
