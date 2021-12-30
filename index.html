@@ -29,17 +29,36 @@
 </div>
 <div class="auth-modal modal-reg-auth">
     <div class="auth-modal__wrapper modal-reg-auth__wrapper">
-        <form class="auth-modal__form modal-reg-auth__form" method="post">
+        <form class="auth-modal__form modal-reg-auth__form" method="post" id="authForm">
             <div class="modal-reg-auth__top">
                 <div class="auth-modal__title modal-reg-auth__title">Авторизация</div>
                 <div class="modal-reg-auth__close">&#65794;</div>
             </div>
-            <label for="auth-username"></label>
-            <input id="auth-username" type="text" class="auth-modal__input modal-reg-auth__input"
-                   placeholder="Введите логин">
-            <label for="auth-password"></label>
-            <input id="auth-password" type="password" class="auth-modal__input modal-reg-auth__input"
-                   placeholder="Введите пароль">
+            <div class="modal-reg-auth__item">
+                <label for="auth-username"></label>
+                <input id="auth-username" type="text" class="auth-modal__input modal-reg-auth__input"
+                       placeholder="Введите логин">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="modal-reg-auth__item">
+                <label for="auth-password"></label>
+                <input id="auth-password" type="password" class="auth-modal__input modal-reg-auth__input"
+                       placeholder="Введите пароль">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+
             <div class="auth-modal__footer modal-reg-auth__footer">
                 <button type="submit">Авторизироваться</button>
             </div>

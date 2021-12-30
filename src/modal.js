@@ -55,49 +55,69 @@ const openModal = (e) => {
 };
 
 const registerForm = document.querySelector('.register-modal__form')
+const authForm = document.querySelector('.auth-modal__form')
 const registerUsername = document.getElementById('register-username')
+const authUsername = document.getElementById('auth-username')
 const registerEmail = document.getElementById('register-email')
 const registerFirstname = document.getElementById('register-firstname')
 const registerLastname = document.getElementById('register-lastname')
 const registerPassword = document.getElementById('register-password')
+const authPassword = document.getElementById('auth-password')
 const registerRetryPassword = document.getElementById('register-retry-password')
 
+const messages = {
+    0: 'Поле не может быть пустым',
+    1: 'Пароли должен иметь более 6-ти символов',
+    2: 'Пароли не совпадают',
+    3: 'Неверный email'
+}
 
 const validationForm = () => {
     registerForm.addEventListener('submit', (e) => {
         e.preventDefault()
         checkInputs()
     })
+    authForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        checkInputs()
+    })
     const checkInputs = () => {
         const usernameValue = registerUsername.value.trim();
+        const authUsernameValue = authUsername.value.trim();
         const emailValue = registerEmail.value.trim();
         const firstnameValue = registerFirstname.value.trim();
         const lastnameValue = registerLastname.value.trim();
         const passwordValue = registerPassword.value.trim();
         const password2Value = registerRetryPassword.value.trim();
+        const authPasswordValue = authPassword.value.trim();
 
-        if (usernameValue === '') setError(registerUsername, 'Имя пользователя не может быть пустым')
+        if (usernameValue === '') setError(registerUsername, messages[0])
         else setSuccess(registerUsername)
+        if (authUsernameValue === '') setError(authUsername, messages[0])
+        else setSuccess(authUsername)
 
-        if (emailValue === '') setError(registerEmail, 'Email не может быть пустым')
-        else if (!isEmail(emailValue)) setError(registerEmail, 'Неверный email')
+        if (emailValue === '') setError(registerEmail, messages[0])
+        else if (!isEmail(emailValue)) setError(registerEmail, messages[3])
         else setSuccess(registerEmail)
 
-        if (firstnameValue === '') setError(registerFirstname, 'Поле не может быть пустым')
+        if (firstnameValue === '') setError(registerFirstname, messages[0])
         else setSuccess(registerFirstname)
 
-        if (lastnameValue === '') setError(registerLastname, 'Поле не может быть пустым')
+        if (lastnameValue === '') setError(registerLastname, messages[0])
         else setSuccess(registerLastname)
 
-        if (passwordValue === '') setError(registerPassword, 'Поле пароля не может быть пустым')
-        else if (passwordValue.length < 6) setError(registerPassword, 'Пароль должеть быть более 6-ти символов')
+        if (passwordValue === '') setError(registerPassword, messages[0])
+        else if (passwordValue.length < 6) setError(registerPassword, messages[1])
         else setSuccess(registerPassword);
 
-        if (password2Value === '') setError(registerRetryPassword, 'Поле не может быть пустым')
-        else if (passwordValue !== password2Value) setError(registerRetryPassword, 'Пароли не совпадают')
+        if (password2Value === '') setError(registerRetryPassword, messages[0])
+        else if (passwordValue !== password2Value) setError(registerRetryPassword, messages[2])
         else setSuccess(registerRetryPassword);
-    }
 
+        if (authPasswordValue === '') setError(authPassword, messages[0])
+        else if (authPasswordValue.length < 6) setError(authPassword, messages[1])
+        else setSuccess(authPassword);
+    }
     const setError = (input, message) => {
         const formControl = input.parentElement;
         const error = formControl.querySelector('.modal-reg-auth__error');
