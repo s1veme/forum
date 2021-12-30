@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+            rel="stylesheet"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/styles.css"/>
+</head>
+<body>
+<header class="header">
+    <div class="header__logo">Logo</div>
+    .
+    <div class="user">
+        <img class="user__img" src=" ./assets/images/default_user.png"/>
+    </div>
+</header>
+
+<div class="modal">
+    <div class="modal__content">
+        <a class="logout button">Выйти</a>
+        <a class="login button" data-type-btn="auth">Авторизация</a>
+        <a class="login button" data-type-btn="reg">Регистрация</a>
+    </div>
+</div>
+<div class="auth-modal modal-reg-auth">
+    <div class="auth-modal__wrapper modal-reg-auth__wrapper">
+        <form class="auth-modal__form modal-reg-auth__form" method="post">
+            <div class="modal-reg-auth__top">
+                <div class="auth-modal__title modal-reg-auth__title">Авторизация</div>
+                <div class="modal-reg-auth__close">&#65794;</div>
+            </div>
+            <label for="auth-username"></label>
+            <input id="auth-username" type="text" class="auth-modal__input modal-reg-auth__input"
+                   placeholder="Введите логин">
+            <label for="auth-password"></label>
+            <input id="auth-password" type="password" class="auth-modal__input modal-reg-auth__input"
+                   placeholder="Введите пароль">
+            <div class="auth-modal__footer modal-reg-auth__footer">
+                <button type="submit">Авторизироваться</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="register-modal modal-reg-auth">
+    <div class="register-modal__wrapper modal-reg-auth__wrapper">
+        <form class="register-modal__form modal-reg-auth__form" method="post">
+            <div class="modal-reg-auth__top">
+                <div class="register-modal__title modal-reg-auth__title">Регистрация</div>
+                <div class="modal-reg-auth__close">&#65794;</div>
+            </div>
+            <div class="modal-reg-auth__item ">
+                <label for="register-username">Логин</label>
+                <input id="register-username" type="text"
+                       name="username"
+                       class="register-modal__input modal-reg-auth__input "
+                       placeholder="Введите логин">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="modal-reg-auth__item">
+                <label for="register-email">Почта</label>
+                <input id="register-email" type="email"
+                       name="email" class="register-modal__input modal-reg-auth__input"
+                       placeholder="Введите почту">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="modal-reg-auth__item">
+                <label for="register-firstname">Имя</label>
+                <input id="register-firstname" type="text"
+                       name="firstname"
+                       class="register-modal__input modal-reg-auth__input"
+                       placeholder="Введите имя">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="modal-reg-auth__item">
+                <label for="register-lastname">Фамилия</label>
+                <input id="register-lastname" type="text"
+                       name="lastname"
+                       class="register-modal__input modal-reg-auth__input"
+                       placeholder="Введите фамилию">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="modal-reg-auth__item">
+                <label for="register-password">Пароль</label>
+                <input id="register-password" type="password"
+                       name="password"
+                       class="register-modal__input modal-reg-auth__input"
+                       placeholder="Введите пароль">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="modal-reg-auth__item">
+                <label for="register-retry-password">Повторите пароль</label>
+                <input id="register-retry-password"
+                       type="password" name="retry-password"
+                       class="register-modal__input modal-reg-auth__input"
+                       placeholder="Введите повторно пароль">
+                <div class="modal-reg-auth__item-error">
+                    <img src="./assets/images/error.svg" alt="error">
+                </div>
+                <div class="modal-reg-auth__item-success">
+                    <img src="./assets/images/success.svg" alt="success">
+                </div>
+                <div class="modal-reg-auth__error"></div>
+            </div>
+            <div class="register-modal__footer modal-reg-auth__footer">
+                <button type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="questions"></div>
+    </div>
+</div>
+</body>
+
+
+<script src="./dist/main.js"></script>
+</html>

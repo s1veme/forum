@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":"AAAAA,QAAQC,IAAI,OAEZD,QAAQC,IAAI","sources":["webpack://frontend/./src/main.js"],"sourcesContent":["console.log('aaa'); \r\nconst aaa = 1;     \r\nconsole.log('bbbb')"],"names":["console","log"],"sourceRoot":""}
