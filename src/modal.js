@@ -75,16 +75,30 @@ const validationForm = () => {
         const lastnameValue = registerLastname.value.trim();
         const passwordValue = registerPassword.value.trim();
         const password2Value = registerRetryPassword.value.trim();
-        if (usernameValue === '') setError(registerUsername, 'Username cannot be blank')
+
+        if (usernameValue === '') setError(registerUsername, 'Имя пользователя не может быть пустым')
         else setSuccess(registerUsername)
-        if (passwordValue === '') {
-            setError(registerPassword, 'Password cannot be blank');
-        } else {
-            setSuccess(registerPassword);
-        }
+
+        if (emailValue === '') setError(registerEmail, 'Email не может быть пустым')
+        else if (!isEmail(emailValue)) setError(registerEmail, 'Неверный email')
+        else setSuccess(registerEmail)
+
+        if (firstnameValue === '') setError(registerFirstname, 'Поле не может быть пустым')
+        else setSuccess(registerFirstname)
+
+        if (lastnameValue === '') setError(registerLastname, 'Поле не может быть пустым')
+        else setSuccess(registerLastname)
+
+        if (passwordValue === '') setError(registerPassword, 'Поле пароля не может быть пустым')
+        else if (passwordValue.length < 6) setError(registerPassword, 'Пароль должеть быть более 6-ти символов')
+        else setSuccess(registerPassword);
+
+        if (password2Value === '') setError(registerRetryPassword, 'Поле не может быть пустым')
+        else if (passwordValue !== password2Value) setError(registerRetryPassword, 'Пароли не совпадают')
+        else setSuccess(registerRetryPassword);
     }
 
-    function setError(input, message) {
+    const setError = (input, message) => {
         const formControl = input.parentElement;
         const error = formControl.querySelector('.modal-reg-auth__error');
         formControl.classList.remove('modal-reg-auth__success-border')
@@ -92,13 +106,15 @@ const validationForm = () => {
         error.innerText = message
     }
 
-    function setSuccess(input) {
+    const setSuccess = (input) => {
         const formControl = input.parentElement;
         const error = formControl.querySelector('.modal-reg-auth__error');
-        // formControl.className = 'modal-reg-auth__success-border';
         formControl.classList.remove('modal-reg-auth__error-border')
         formControl.classList.add('modal-reg-auth__success-border')
         error.innerText = ''
+    }
+    const isEmail = (email) => {
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
     }
 }
 export {openModal, validationForm};
