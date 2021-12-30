@@ -73,9 +73,18 @@ const messages = {
 }
 
 const validationForm = () => {
-    registerForm.addEventListener('submit', (e) => {
+    registerForm.addEventListener('submit', async (e) => {
         e.preventDefault()
         checkInputs()
+        const oldForm = document.forms.registerForm,
+            formData = new FormData(oldForm);
+        for (let [name, value] of formData) {
+            console.log(`${name} = ${value}`);
+        }
+
+        let response = await axios.post('/api/auth/users', formData)
+        let result = await response.json()
+        console.log(result.message)
     })
     authForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -117,6 +126,7 @@ const validationForm = () => {
         if (authPasswordValue === '') setError(authPassword, messages[0])
         else if (authPasswordValue.length < 6) setError(authPassword, messages[1])
         else setSuccess(authPassword);
+
     }
     const setError = (input, message) => {
         const formControl = input.parentElement;
@@ -136,5 +146,7 @@ const validationForm = () => {
     const isEmail = (email) => {
         return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
     }
+
+
 }
 export {openModal, validationForm};

@@ -31,23 +31,21 @@ let conf = {
       },
     ],
   },
-  
   devServer: {
     static: __dirname + "/",
     devMiddleware: {
       publicPath: "/dist/",
     },
-
     compress: true,
     client: {
       overlay: true,
     },
     proxy: {
         '^/': {
-            target: 'http://127.0.0.1/',
+            target: 'http://localhost:8000',
             secure: false
         },
-    }
+    },
   },
 };
 
