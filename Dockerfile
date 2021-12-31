@@ -9,3 +9,5 @@ ADD . /usr/src/forum
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+
+ENTRYPOINT ["/usr/src/forum/entrypoint.sh"]
