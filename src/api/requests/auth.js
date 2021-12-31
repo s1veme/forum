@@ -1,10 +1,10 @@
 import axios from "axios"
 
 export default {
-    get(){
-        return axios.get('api/user/get')
+    get() {
+        axios.post('api/user/get')
     },
-    create(){
-        
+    create() {
     }
 }
+

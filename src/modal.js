@@ -11,7 +11,7 @@ const openModal = (e) => {
         : modal.classList.add("login");
 
     const toggleAnim = (elem, direction) => {
-        return elem.animate([{top: "80px", opacity: 1}, {
+        return elem.animate([{ top: "80px", opacity: 1 }, {
             top: "-130px", opacity: 0,
         },], {
             duration: 200, fill: "forwards", direction,
@@ -82,13 +82,26 @@ const validationForm = () => {
             console.log(`${name} = ${value}`);
         }
 
-        let response = await axios.post('/api/auth/users', formData)
-        let result = await response.json()
+        const response = await axios.post('/api/auth/users/', formData)
+        const result = response.json()
         console.log(result.message)
     })
-    authForm.addEventListener('submit', (e) => {
+    authForm.addEventListener('submit', async (e) => {
         e.preventDefault()
         checkInputs()
+        const oldForm = document.forms.authForm,
+            formData = new FormData(oldForm)
+        for (let [name, value] of formData) {
+            console.log(`${name} = ${value}`);
+        }
+        const response = await axios.post('/api/user/token-create/', formData)
+        if (response.data.token) {
+            const token = response.data.token
+            localStorage.setItem('token', token)
+            axios.defaults.headers['Authorization'] = `Bearer ${token}`
+        }
+        location.reload()
+
     })
     const checkInputs = () => {
         const usernameValue = registerUsername.value.trim();
@@ -149,4 +162,4 @@ const validationForm = () => {
 
 
 }
-export {openModal, validationForm};
+export { openModal, validationForm };

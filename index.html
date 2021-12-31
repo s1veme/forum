@@ -22,21 +22,24 @@
 
 <div class="modal">
     <div class="modal__content">
-        <a class="logout button">Выйти</a>
+        <a class="logout button" id="logoutBtn"data-type-btn="logout">Выйти</a>
         <a class="login button" data-type-btn="auth">Авторизация</a>
         <a class="login button" data-type-btn="reg">Регистрация</a>
     </div>
 </div>
 <div class="auth-modal modal-reg-auth">
     <div class="auth-modal__wrapper modal-reg-auth__wrapper">
-        <form class="auth-modal__form modal-reg-auth__form" method="post">
+        <form class="auth-modal__form modal-reg-auth__form"
+              method="post"
+              name="authForm"
+              id="authForm">
             <div class="modal-reg-auth__top">
                 <div class="auth-modal__title modal-reg-auth__title">Авторизация</div>
                 <div class="modal-reg-auth__close">&#65794;</div>
             </div>
             <div class="modal-reg-auth__item">
                 <label for="auth-username"></label>
-                <input id="auth-username" type="text" class="auth-modal__input modal-reg-auth__input"
+                <input id="auth-username" type="text" name="email" class="auth-modal__input modal-reg-auth__input"
                        placeholder="Введите логин">
                 <div class="modal-reg-auth__item-error">
                     <img src="./assets/images/error.svg" alt="error">
@@ -48,7 +51,7 @@
             </div>
             <div class="modal-reg-auth__item">
                 <label for="auth-password"></label>
-                <input id="auth-password" type="password" class="auth-modal__input modal-reg-auth__input"
+                <input id="auth-password" type="password" name="password" class="auth-modal__input modal-reg-auth__input"
                        placeholder="Введите пароль">
                 <div class="modal-reg-auth__item-error">
                     <img src="./assets/images/error.svg" alt="error">
@@ -67,7 +70,10 @@
 </div>
 <div class="register-modal modal-reg-auth">
     <div class="register-modal__wrapper modal-reg-auth__wrapper">
-        <form class="register-modal__form modal-reg-auth__form" method="post" name="registerForm" id="registerForm">
+        <form class="register-modal__form modal-reg-auth__form"
+              method="post"
+              name="registerForm"
+              id="registerForm">
             <div class="modal-reg-auth__top">
                 <div class="register-modal__title modal-reg-auth__title">Регистрация</div>
                 <div class="modal-reg-auth__close">&#65794;</div>
