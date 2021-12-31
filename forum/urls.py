@@ -1,7 +1,9 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import (
     path,
-    include
+    include,
 )
 
 from ajax_select import urls as ajax_select_urls
@@ -20,3 +22,6 @@ urlpatterns = [
     path('api/posts/', include('posts.urls')),
     path('api/news/', include('news.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
