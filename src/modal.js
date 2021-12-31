@@ -6,7 +6,7 @@ const registerModal = document.querySelector(".register-modal");
 const closeModalBtn = document.querySelectorAll(".modal-reg-auth__close");
 
 const openModal = (e) => {
-    axios.defaults.headers.token
+    axios.defaults.headers['Authorization']
         ? modal.classList.add("logout")
         : modal.classList.add("login");
 
