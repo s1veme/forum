@@ -1,0 +1,31 @@
+.question {
+  padding: 20px;
+  box-shadow: -20px 20px 0 -17px #eee, 20px -20px 0 -17px #eee,
+    20px 20px 0 -20px #592385, 0 0 0 2px #592385;
+  margin: 20px auto;
+
+  &__title {
+    font-size: 1.1em;
+  }
+  &__content {
+    font-size: 0.9em;
+    color: rgb(105, 105, 105);
+    margin-top: 20px;
+  }
+
+  &__tags {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    padding: 3px 15px 5px;
+    background-color: rgb(238, 238, 238);
+    margin: 10px 5px;
+    border-radius: 10px;
+  }
+}
+
+

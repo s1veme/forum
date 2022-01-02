@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap");
+
+.nav {
+  background-color: #232b2b;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 50px;
+  .logo {
+    color: white;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .user {
+    &__avatar {
+      cursor: pointer;
+      padding: 5px;
+      background-color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+}
