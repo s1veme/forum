@@ -17,17 +17,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
- 
 
-.container{
+.container {
   margin-top: 100px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 @media (max-width: 1000px) {
-  .container{
+  .container {
     padding: 0 20px;
   }
-  
+}
+
+a {
+  text-decoration: none;
+}
+
+#toast-container {
+  position: fixed;
+  top: 0px !important;
+  right: 0;
+}
+.toast {
+  background-color: gray;
+  padding: 25px 20px;
+  color: white;
+  margin: 20px;
+  top: 0px !important;
+}
+
+.toast.error {
+  background-color: rgb(155, 30, 30);
+}
+.toast.succes {
+  background-color: green;
 }

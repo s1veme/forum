@@ -6,14 +6,16 @@ import { Spinner } from "../../ui-components/Spinner/Spinner";
 
 export const HomePage = () => {
   const [questions, setQuestions] = useState();
-  const [isLoading, setLoading] = useState();
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const getPosts = async () => {
-      setLoading(true);
       try {
-        setQuestions(await (await requests.question.get()).data.results);
+        setLoading(true);
+        const data = (await requests.question.get()).data.results;
+
         setLoading(false);
+        return setQuestions(data);
       } catch (e) {
         setLoading(false);
         return e;

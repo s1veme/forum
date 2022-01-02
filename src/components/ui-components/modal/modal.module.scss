@@ -1,0 +1,24 @@
+.modal {
+  margin-right: 10px;
+  animation: modal 0.4s forwards;
+
+  &__button {
+    padding: 9px 20px;
+    border-radius: 5px;
+    background-color: #5264ae;
+    cursor: pointer;
+    color: white;
+    margin-left: 10px;
+  }
+}
+
+@keyframes modal {
+  0% {
+    opacity: 0;
+    margin-right: -100px;
+  }
+  100% {
+    opacity: 1;
+    margin-right: 20px;
+  }
+}

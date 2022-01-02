@@ -4,8 +4,10 @@ const auth = {
     get() {
         return axios.get('api/user/profile')
     },
-    create(email, body) {
-        return axios.post('test')
+    create(email, password) {
+        return axios.post('api/user/token-create/', {
+            email, password
+        })
     }
 }
 
