@@ -1,0 +1,36 @@
+.nav {
+  
+  z-index: 1;
+  padding: 10px 5px;
+  position: sticky;
+  top: 70px;
+  background-color: white;
+  
+  padding: 10px 40px;
+  height: 100%;
+  margin: 20px auto;
+
+  margin-top: 40px;
+  &__item {
+    transition: all 0.3s;
+    display: flex;
+    color: #333;
+    align-items: center;
+
+    &:hover {
+      color: #548eaa;
+    }
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+
+    & img {
+      margin-right: 20px;
+      width: 20px;
+      height: 20px;
+    }
+    cursor: pointer;
+
+    list-style-type: none;
+  }
+}

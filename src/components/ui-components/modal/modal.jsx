@@ -9,8 +9,13 @@ export const Modal = ({ isAuth }) => {
   return (
     <div className={classes.modal}>
       {isAuth ? (
-        <div className={classes.modal__button} onClick={logout}>
-          Выйти
+        <div className={classes.modal__buttons}>
+          <div className={classes.modal__button} onClick={logout}>
+            Выйти
+          </div>
+          <NavLink className={classes.modal__button} to="/user/settings">
+            Настройки
+          </NavLink>
         </div>
       ) : (
         <div>

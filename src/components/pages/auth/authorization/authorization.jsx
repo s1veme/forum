@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import requests from "../../../../api/requests";
@@ -7,7 +7,9 @@ import actions from "../../../../redux/actions";
 import classes from "./authorization.module.scss";
 import axios from "axios";
 import M from "materialize-css";
+import { Spinner } from "../../../ui-components/Spinner/Spinner";
 export const AuthorizationPage = () => {
+  const [isLoading, setLoading] = useState(false);
   const cookies = new Cookies();
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -33,16 +35,25 @@ export const AuthorizationPage = () => {
     const [email, password] = validationForm(inputs);
 
     if (email && password) {
-      try {
-        const token = (await requests.auth.create(email, password)).data.token;
-        cookies.set("token", token, { path: "/" });
-        axios.defaults.headers.authorization = `Bearer ${token}`;
-        dispatch(actions.auth(token));
-        M.toast({ html: "auth succes", classes: "succes" });
-        navigate("/");
-      } catch (e) {
-        M.toast({ html: e, classes: "error" });
-      }
+      setLoading(true);
+      requests.auth
+        .create(email, password)
+        .then(({ data }) => {
+          const {token} = data;
+          cookies.set("token", token, { path: "/" });
+          axios.defaults.headers.authorization = `Bearer ${token}`;
+          dispatch(actions.auth(token));
+          M.toast({ html: "auth succes", classes: "succes" });
+          setLoading(false);
+          navigate("/");
+        })
+        .catch((e) => {
+          M.toast({
+            html: [...e.response.data.non_field_errors],
+            classes: "error",
+          });
+          setLoading(false);
+        });
     }
   };
 
@@ -50,7 +61,9 @@ export const AuthorizationPage = () => {
     if (e.target.classList.contains(classes.form__input))
       e.target.style.borderBottom = " 1px solid #ccc";
   };
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className={classes.form__wrapper}>
       <form
         action=""

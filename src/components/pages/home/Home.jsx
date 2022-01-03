@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import requests from "../../../api/requests";
-
+import { RightNav } from "../../RightNav/RightNav";
+import classes from "./Home.module.scss";
 import { Question } from "../../ui-components/question/question";
 import { Spinner } from "../../ui-components/Spinner/Spinner";
 
@@ -14,11 +15,11 @@ export const HomePage = () => {
         setLoading(true);
         const data = (await requests.question.get()).data.results;
 
-        setLoading(false);
-        return setQuestions(data);
+        return setQuestions(data.reverse());
       } catch (e) {
-        setLoading(false);
         return e;
+      } finally {
+        setLoading(false);
       }
     };
     getPosts();
@@ -27,17 +28,21 @@ export const HomePage = () => {
   return isLoading ? (
     <Spinner />
   ) : questions ? (
-    <div className="container">
-      {questions.map(({ title, id, owner, tags, content }, i) => (
-        <Question
-          tags={tags}
-          id={id}
-          title={title}
-          owner={owner}
-          text={content}
-          key={i}
-        />
-      ))}
+    <div className={classes.home__wrap}>
+      <RightNav />
+      <div className="container">
+        {questions.map(({ title, id, owner, tags, content }, i) => (
+          <Question
+            tags={tags}
+            id={id}
+            title={title}
+            owner={owner}
+            text={content}
+            key={i}
+          />
+        ))}
+      </div>
+      <RightNav />
     </div>
   ) : (
     "posts hasnt"

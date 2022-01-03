@@ -16,9 +16,10 @@ export const Question = ({ title, images, owner, text, tags }) => {
         {content.substring(0, 500)}...
       </div>
       <div className={classes.question__tags}>
-        
         {tags.map((el, i) => (
-          <div className={classes.question__tag} key={i}>#{el}</div>
+          <div className={classes.question__tag} key={i}>
+            #{el}
+          </div>
         ))}
       </div>
     </div>

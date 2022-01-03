@@ -50,7 +50,7 @@ export const NavBar = () => {
           </div>
 
           <img
-            src={userData ? userData.avatar : img}
+            src={userData && userData.avatar ? userData.avatar : img}
             alt="user avatar"
             className={classes.user__avatar}
             onClick={() => setOpenModal(!openModal)}

@@ -5,10 +5,14 @@
   &__button {
     padding: 9px 20px;
     border-radius: 5px;
-    background-color: #5264ae;
+    background-color: #548eaa;
     cursor: pointer;
     color: white;
     margin-left: 10px;
+  }
+
+  &__buttons{
+    display: flex;
   }
 }
 

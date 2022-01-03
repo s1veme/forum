@@ -4,8 +4,8 @@ const question = {
     get() {
         return axios.get('api/posts/questions/')
     },
-    create() {
-
+    create(data) {
+        return axios.post('api/posts/create-question/', data)
     }
 }
 

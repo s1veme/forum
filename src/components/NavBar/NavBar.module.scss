@@ -1,12 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap");
 
 .nav {
-  background-color: #232b2b;
+  background-color: #303b44;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 10px 50px;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+
   .logo {
     color: white;
     font-family: "DM Sans", sans-serif;
