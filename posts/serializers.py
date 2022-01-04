@@ -27,6 +27,7 @@ class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
             'content',
             'owner',
             'tags',
+            'timestamp'
         ]
 
 
