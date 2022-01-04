@@ -1,24 +1,21 @@
+from django_filters import rest_framework as filters
 from rest_framework import status
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
     RetrieveAPIView
 )
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import (
-    AllowAny
+    AllowAny,
 )
 from rest_framework.response import Response
-from rest_framework.pagination import PageNumberPagination
-
-from django_filters import rest_framework as filters
-
-from .permissions import IsAuthenticatedAndOwnerOrReadOnly
 
 from .models import (
     Answer,
     Post
 )
-
+from .permissions import IsAuthenticatedAndIsActive
 from .serializers import (
     AnswerSerializer,
     PostSerializer
@@ -34,7 +31,7 @@ class PostPagination(PageNumberPagination):
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.filter(is_active=True)
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticatedAndOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedAndIsActive]
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
@@ -60,7 +57,7 @@ class PostListAPIView(ListAPIView):
 class AnswerCreateAPIView(CreateAPIView):
     queryset = Answer.objects.filter(is_active=True)
     serializer_class = AnswerSerializer
-    permission_classes = [IsAuthenticatedAndOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedAndIsActive]
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
