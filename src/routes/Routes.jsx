@@ -3,6 +3,7 @@ import { AuthorizationPage } from "../components/pages/auth/authorization/author
 import { RegistrationPage } from "../components/pages/auth/registration/registration";
 import { CreateQuestion } from "../components/pages/createQuestion/question";
 import { HomePage } from "../components/pages/home/Home";
+import { QuestionPage } from "../components/pages/question/question";
 
 export const RoutesComponent = () => {
   return (
@@ -11,7 +12,7 @@ export const RoutesComponent = () => {
       <Route exact path="/auth/authorization" element={<AuthorizationPage />} />
       <Route exact path="/auth/registration" element={<RegistrationPage />} />
       <Route exact path="/question/create" element={<CreateQuestion />} />
-      
+      <Route exact path="/question/:id" element={<QuestionPage />} />
     </Routes>
   );
 };

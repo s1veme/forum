@@ -1,7 +1,8 @@
 import classes from "./question.module.scss";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-export const Question = ({ title, images, owner, text, tags }) => {
+export const Question = ({ title, text, tags, id }) => {
   const content = text
     .replace("<p>", "")
     .replace("&nbsp;", "")
@@ -9,9 +10,9 @@ export const Question = ({ title, images, owner, text, tags }) => {
 
   return (
     <div className={classes.question}>
-      <div className={classes.question__title}>
+      <NavLink to={`/question/${id}`} className={classes.question__title}>
         {title.substring(0, 100)}...
-      </div>
+      </NavLink>
       <div className={classes.question__content}>
         {content.substring(0, 500)}...
       </div>

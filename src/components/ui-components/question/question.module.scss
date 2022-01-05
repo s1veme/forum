@@ -6,6 +6,11 @@
   background-color: white;
   &__title {
     font-size: 1.1em;
+    color: black;
+    transition: all 0.3s;
+    &:hover {
+      color: #548eaa;
+    }
   }
   &__content {
     font-size: 0.9em;
@@ -27,5 +32,3 @@
     border-radius: 10px;
   }
 }
-
-

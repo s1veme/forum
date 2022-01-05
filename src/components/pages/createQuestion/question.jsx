@@ -13,19 +13,32 @@ export const CreateQuestion = () => {
   const token = useSelector((token) => token.authReducer.token);
 
   const onSubmit = async (data) => {
-    console.log(data.images, images);
+    console.log({
+      ...data,
+      tags: data.tags.replace(/,/g, "").split(" "),
+      images,
+    });
     try {
       const res = await requests.question.create({
         ...data,
-        tags: data.tags.replace(",", " ").split(" "),
+        tags: data.tags.replace(/,/g, "").split(" "),
         images,
       });
+      M.toast({ html: "Пост успешно создан", classes: "succes" });
     } catch (e) {
       M.toast({ html: e.response.data.detail, classes: "error" });
     }
   };
+
+  const removeFile = (index) => {
+    setImages((prev) => prev.filter((el) => el !== prev[index]));
+    setUploaded((prev) => prev.filter((el) => el !== prev[index]));
+  };
+
   const changeFilesHandler = (e) => {
     Array.from(e.target.files).forEach((el) => {
+      if (images.filter((element) => el.name === element.name).length !== 0)
+        return M.toast({ html: "Такая картинка уже есть", classes: "error" });
       setImages((prev) => [...prev, el]);
       let reader = new FileReader();
       reader.addEventListener("load", handleFile);
@@ -38,6 +51,7 @@ export const CreateQuestion = () => {
     setUploaded((prevState) => [...prevState, content]);
     // You can set content in state and show it in render.
   };
+  console.log(images);
 
   return token ? (
     <div className={classes.page}>
@@ -68,7 +82,7 @@ export const CreateQuestion = () => {
               className={classes.form__input}
               required
               type="text"
-              {...register("description")}
+              {...register("content")}
             ></textarea>
             <span className={classes.form__bar}></span>
             <label>Вопрос</label>
@@ -99,7 +113,12 @@ export const CreateQuestion = () => {
           <div className={classes.form__uploaded}>
             {uploaded.map((el, i) => (
               <div className={classes.img__wrap} key={i}>
-                <img src={cross} alt="cross" className={classes.cross} />
+                <img
+                  src={cross}
+                  alt="cross"
+                  className={classes.cross}
+                  onClick={() => removeFile(i)}
+                />
                 <img src={el} alt="uploaded" />
               </div>
             ))}

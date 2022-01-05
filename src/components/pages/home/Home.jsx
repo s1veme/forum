@@ -14,8 +14,7 @@ export const HomePage = () => {
       try {
         setLoading(true);
         const data = (await requests.question.get()).data.results;
-
-        return setQuestions(data.reverse());
+        return setQuestions(data);
       } catch (e) {
         return e;
       } finally {
@@ -31,15 +30,8 @@ export const HomePage = () => {
     <div className={classes.home__wrap}>
       <RightNav />
       <div className="container">
-        {questions.map(({ title, id, owner, tags, content }, i) => (
-          <Question
-            tags={tags}
-            id={id}
-            title={title}
-            owner={owner}
-            text={content}
-            key={i}
-          />
+        {questions.map(({ title, id, tags, content }, i) => (
+          <Question tags={tags} id={id} title={title} text={content} key={i} />
         ))}
       </div>
       <RightNav />
