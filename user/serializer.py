@@ -13,3 +13,4 @@ class UserSerializer(serializers.ModelSerializer):
             'status',
             'avatar',
         ]
+        ref_name = "UserSerializerForum"

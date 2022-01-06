@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'taggit_serializer',
     'django_filters',
     'imagekit',
+    'drf_yasg',
 
     # local
     'user',
