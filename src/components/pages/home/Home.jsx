@@ -13,7 +13,7 @@ export const HomePage = () => {
     const getPosts = async () => {
       try {
         setLoading(true);
-        const data = (await requests.question.get()).data.results;
+        const data = (await requests.questions.get()).data.results;
         return setQuestions(data);
       } catch (e) {
         return e;

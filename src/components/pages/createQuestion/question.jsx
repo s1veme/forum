@@ -19,7 +19,7 @@ export const CreateQuestion = () => {
       images,
     });
     try {
-      const res = await requests.question.create({
+      await requests.questions.create({
         ...data,
         tags: data.tags.replace(/,/g, "").split(" "),
         images,
@@ -51,7 +51,6 @@ export const CreateQuestion = () => {
     setUploaded((prevState) => [...prevState, content]);
     // You can set content in state and show it in render.
   };
-  console.log(images);
 
   return token ? (
     <div className={classes.page}>

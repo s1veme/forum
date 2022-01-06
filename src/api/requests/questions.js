@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const question = {
+const questions = {
     get() {
         return axios.get('api/posts/questions/')
     },
@@ -9,7 +9,7 @@ const question = {
     }
 }
 
-export default question
+export default questions
 
 
 
