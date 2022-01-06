@@ -54,6 +54,12 @@ class PostListAPIView(ListAPIView):
     filterset_fields = ('tags__name',)
 
 
+class PostRetrieveAPIView(RetrieveAPIView):
+    queryset = Post.objects.filter(is_active=True)
+    serializer_class = PostSerializer
+    permission_classes = [AllowAny]
+
+
 class AnswerCreateAPIView(CreateAPIView):
     queryset = Answer.objects.filter(is_active=True)
     serializer_class = AnswerSerializer
