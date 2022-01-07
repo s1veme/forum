@@ -22,6 +22,7 @@ export const QuestionPage = () => {
     };
     getQuestionData();
   }, [id]);
+  console.log(questionData);
   return isLoading || !questionData ? (
     <Spinner />
   ) : (
@@ -29,8 +30,10 @@ export const QuestionPage = () => {
       <div className={classes.post__title}>{questionData.title}</div>
       <div className={classes.post__content}>{questionData.content}</div>
       <div className={classes.post__tags}>
-        {questionData.tags.map((el) => (
-          <div className={classes.post__tag}>#{el}</div>
+        {questionData.tags.map((el, i) => (
+          <div className={classes.post__tag} key={i}>
+            #{el}
+          </div>
         ))}
       </div>
     </div>

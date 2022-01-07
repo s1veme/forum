@@ -10,9 +10,52 @@ import { NavLink } from "react-router-dom";
 export const NavBar = () => {
   const [userData, setUserData] = useState();
   const [isLoading, setLoading] = useState();
-  const [openModal, setOpenModal] = useState();
   const token = useSelector((state) => state.authReducer.token);
-
+  const openModal = (e) => {
+    const modal = document.querySelector("." + classes.modal__wrap);
+    if (matchMedia("(max-width: 700px)").matches) {
+      const toggleAnimate = (direction) => {
+        return modal.animate(
+          [{ transform: "translateY(0%)" }, { transform: "translateY(200%)" }],
+          {
+            duration: 200,
+            fill: "forwards",
+            direction,
+          }
+        );
+      };
+      if (modal.classList.contains(classes.open)) {
+        toggleAnimate().addEventListener("finish", () => {
+          modal.classList.remove(classes.open);
+        });
+      } else {
+        modal.classList.add(classes.open);
+        toggleAnimate("reverse");
+      }
+    } else {
+      const toggleAnimate = (direction) => {
+        return modal.animate(
+          [
+            { transform: "translateX(200%)" },
+            { transform: "translateX(-10%)" },
+          ],
+          {
+            duration: 200,
+            fill: "forwards",
+            direction,
+          }
+        );
+      };
+      if (modal.classList.contains(classes.open)) {
+        toggleAnimate("reverse").addEventListener("finish", () =>
+          modal.classList.remove(classes.open)
+        );
+      } else {
+        modal.classList.add(classes.open);
+        toggleAnimate();
+      }
+    }
+  };
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -40,11 +83,10 @@ export const NavBar = () => {
       </NavLink>
       <div className={classes.menu}>
         <div className={classes.user}>
-          {openModal && (
-            <div onClick={() => setOpenModal(false)}>
-              <Modal isAuth={!!token} />
-            </div>
-          )}
+          <div onClick={openModal} className={classes.modal__wrap}>
+            <Modal isAuth={!!token} />
+          </div>
+
           <div className={classes.user__name}>
             {userData ? userData.username : ""}
           </div>
@@ -53,7 +95,7 @@ export const NavBar = () => {
             src={userData && userData.avatar ? userData.avatar : img}
             alt="user avatar"
             className={classes.user__avatar}
-            onClick={() => setOpenModal(!openModal)}
+            onClick={openModal}
           />
         </div>
       </div>
