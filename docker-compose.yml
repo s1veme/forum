@@ -1,17 +1,26 @@
 version: '3.8'
+
 services:
   django:
-    build: ./
+    build:
+      context: ./
+      dockerfile: Dockerfile
     env_file:
       - .env
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/forum
     ports:
       - "8000:8000"
-    networks:
-      - forum_network
 
-networks:
-  forum_network:
-    driver: bridge
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - django
+    ports:
+      - "80:80"
+    volumes:
+      - "./static/:/static"
+
+
