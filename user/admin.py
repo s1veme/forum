@@ -18,6 +18,8 @@ class UserAdmin(BaseUserAdmin):
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
 
         ('Informations', {'fields': ('updated_at', 'created_at')}),
+
+        ('Achievements', {'fields': ('achievements',)})
     )
 
     readonly_fields = ('updated_at', 'created_at')

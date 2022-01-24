@@ -8,6 +8,8 @@ from django.db import models
 from imagekit.models.fields import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+from achievements.models import Achievement
+
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
@@ -60,6 +62,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name='Аватарка пользователя',
         blank=True,
         null=True
+    )
+    achievements = models.ManyToManyField(
+        Achievement
     )
     is_active = models.BooleanField(
         default=True

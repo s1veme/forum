@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'posts',
     'news',
     'search',
-
+    'achievements',
 ]
 
 MIDDLEWARE = [
