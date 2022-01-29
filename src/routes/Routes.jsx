@@ -4,6 +4,7 @@ import { RegistrationPage } from "../components/pages/auth/registration/registra
 import { CreateQuestion } from "../components/pages/createQuestion/question";
 import { HomePage } from "../components/pages/home/Home";
 import { QuestionPage } from "../components/pages/question/question";
+import { Questions } from "../components/pages/questions/questions";
 
 export const RoutesComponent = () => {
   return (
@@ -13,6 +14,7 @@ export const RoutesComponent = () => {
       <Route exact path="/auth/registration" element={<RegistrationPage />} />
       <Route exact path="/question/create" element={<CreateQuestion />} />
       <Route exact path="/question/:id" element={<QuestionPage />} />
+      <Route exact path="/tape" element={<Questions />} />
     </Routes>
   );
 };

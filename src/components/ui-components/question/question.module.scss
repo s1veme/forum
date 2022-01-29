@@ -1,34 +1,46 @@
+@import "../../../utils/index.scss";
+
 .question {
-  padding: 20px;
-  box-shadow: -20px 20px 0 -17px #eee, 20px -20px 0 -17px #eee,
-    20px 20px 0 -20px #592385, 0 0 0 2px #592385;
-  margin: 20px auto;
+  padding: 15px;
   background-color: white;
+  margin-top: 30px;
+  color: $text;
+  border-bottom: 2px solid rgb(233, 233, 233);
   &__title {
-    font-size: 1.1em;
     color: black;
+    font-size: 18px;
+    font-weight: 600;
     transition: all 0.3s;
     &:hover {
-      color: #548eaa;
+      color: blue;
     }
-  }
-  &__content {
-    font-size: 0.9em;
-    color: rgb(105, 105, 105);
-    margin-top: 20px;
   }
 
   &__tags {
-    margin-top: 20px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    width: 80%;
+    color: black;
   }
 
   &__tag {
-    padding: 3px 15px 5px;
-    background-color: rgb(238, 238, 238);
-    margin: 10px 5px;
+    margin-top: 10px;
+    padding: 3px 0 5px;
     border-radius: 10px;
+    margin-right: 10px;
+    background-color: rgb(176, 191, 243);
+    padding: 10px;
+    cursor: pointer;
+  }
+  &__footer {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+
+  }
+  &__time {
+    margin-top: 10px;
+    width: 20%;
   }
 }

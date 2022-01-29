@@ -39,7 +39,7 @@ export const AuthorizationPage = () => {
       requests.auth
         .create(email, password)
         .then(({ data }) => {
-          const {token} = data;
+          const { token } = data;
           cookies.set("token", token, { path: "/" });
           axios.defaults.headers.authorization = `Bearer ${token}`;
           dispatch(actions.auth(token));
@@ -53,7 +53,8 @@ export const AuthorizationPage = () => {
             classes: "error",
           });
           setLoading(false);
-        });
+        })
+        .finally(() => setLoading(false));
     }
   };
 
