@@ -1,9 +1,7 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-const API_URL = "https://77em4-8080.sse.codesandbox.io";
-const UPLOAD_ENDPOINT = "upload_files";
+import axios from "axios";
 
 export default function MyEditor({ handleChange, ...props }) {
   function uploadAdapter(loader) {
@@ -13,15 +11,12 @@ export default function MyEditor({ handleChange, ...props }) {
           const body = new FormData();
           loader.file.then((file) => {
             body.append("files", file);
-
-            fetch(`${API_URL}/${UPLOAD_ENDPOINT}`, {
-              method: "post",
-              body: body,
-            })
-              .then((res) => res.json())
+            axios
+              .post(`http://127.0.0.1:8000/ckeditor/upload/ `, body)
               .then((res) => {
+                console.log(res)
                 resolve({
-                  default: `${API_URL}/${res.filename}`,
+                  default: res,
                 });
               })
               .catch((err) => {

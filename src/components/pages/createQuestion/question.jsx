@@ -7,23 +7,29 @@ import requests from "../../../api/requests";
 import M from "materialize-css";
 import { useSelector } from "react-redux";
 import MyEditor from "./editor/editor";
+import { useNavigate } from "react-router-dom";
 
 export const CreateQuestion = () => {
   const { register, handleSubmit } = useForm();
   const [content, setContent] = useState();
   const token = useSelector((token) => token.authReducer.token);
-
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-      console.log(content);
-      await requests.questions.create({
-        ...data,
-        content,
-        tags: data.tags.replace(/,/g, "").split(" "),
-      });
+      const { id } = (
+        await requests.questions.create({
+          ...data,
+          content,
+          tags: data.tags.replace(/,/g, "").split(" "),
+        })
+      ).data;
       M.toast({ html: "Пост успешно создан", classes: "succes" });
+      navigate(`/question/${id}`);
     } catch (e) {
-      M.toast({ html: e.response.data, classes: "error" });
+      for(let i in e.response.data){
+        M.toast({ html: e.response.data[i], classes: "error" });
+      }
+      
     }
   };
   const handleChange = (data) => {

@@ -9,18 +9,32 @@ import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
 import actions from "../../redux/actions";
 import logo from "../../assets/images/logo.svg";
+import useOnClickOutside from "../../hooks/useOutsideClick";
 export const NavBar = () => {
   const cookies = new Cookies();
   const [userData, setUserData] = useState();
   const [isLoading, setLoading] = useState();
+  const [modal, setOpenModal] = useState(false);
+
+  const modalRef = useRef();
 
   const token = useSelector((state) => state.authReducer.token);
   const dispatch = useDispatch();
 
-  const logOut = () => {
-    dispatch(actions.auth(undefined));
-    cookies.remove("token");
-    window.location.reload();
+  const openModal = () => {
+    setOpenModal(true);
+  };
+
+  useOnClickOutside(modalRef, () => setOpenModal(false))
+
+  const logOut = async () => {
+    await dispatch(actions.auth(undefined));
+    await cookies.remove("token");
+    await window.location.reload();
+  };
+
+  const closeModal = (e) => {
+    if (e.target.classList.contains(classes.modal__button)) setOpenModal(false);
   };
 
   useEffect(() => {
@@ -53,7 +67,9 @@ export const NavBar = () => {
       <div className={classes.menu__wrap}>
         <div className={classes.menu}>
           <div className={classes.menu__item}>ВОПРОСЫ</div>
-          <NavLink to={"/tape"} className={classes.menu__item}>ЛЕНТА</NavLink>
+          <NavLink to={"/tape"} className={classes.menu__item}>
+            ЛЕНТА
+          </NavLink>
           <div className={classes.menu__item}>ПОПУЛЯРНОЕ</div>
         </div>
         <div className={classes.user}>
@@ -67,7 +83,55 @@ export const NavBar = () => {
             src={userData && userData.avatar ? userData.avatar : img}
             alt="user avatar"
             className={classes.user__avatar}
+            onClick={openModal}
           />
+          {modal && (
+            <div className={classes.modal} onClick={closeModal} ref={modalRef}>
+              <div className={classes.modal__user}>
+                <img
+                  src={userData && userData.avatar ? userData.avatar : img}
+                  alt="user avatar"
+                  className={classes.user__avatar}
+                />
+                <div className={classes.user__name}>
+                  {userData ? userData.username : ""}
+                </div>
+              </div>
+
+              {!!token ? (
+                <>
+                  <NavLink
+                    className={classes.modal__button}
+                    to={"/question/create"}
+                  >
+                    Задать вопрос
+                  </NavLink>
+                  <div className={classes.modal__button}>Мои вопросы</div>
+                  <div className={classes.modal__button}>Профиль</div>
+                  <div className={classes.modal__button}>Настройки</div>
+                  <div className={classes.modal__button} onClick={logOut}>
+                    Выйти
+                  </div>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to={"/auth/authorization"}
+                    className={classes.modal__button}
+                    onClick={closeModal}
+                  >
+                    Авторизоваться
+                  </NavLink>
+                  <NavLink
+                    to={"/auth/registration"}
+                    className={classes.modal__button}
+                  >
+                    Зарегестрироваться
+                  </NavLink>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </nav>

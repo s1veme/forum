@@ -55,3 +55,8 @@ a {
   background-color: green;
 }
 
+
+.ck-content{
+  min-height: 300px;
+}
+

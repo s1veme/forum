@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import requests from "../../../../api/requests";
@@ -8,43 +8,34 @@ import classes from "./authorization.module.scss";
 import axios from "axios";
 import M from "materialize-css";
 import { Spinner } from "../../../ui-components/Spinner/Spinner";
+
+const validate = {
+  email: "",
+  password: "",
+};
+
 export const AuthorizationPage = () => {
-  const [isLoading, setLoading] = useState(false);
-  const cookies = new Cookies();
+  const [isLoading, setLoading] = useState();
+  const [form, setForm] = useState({ email: "", password: "" });
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const validationForm = (elements) => {
-    const res = [];
-    elements[0].value.match(
-      /([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}/
-    )
-      ? res.push(elements[0].value)
-      : (elements[0].style.borderBottom = "1px solid red");
 
-    elements[1].value.length > 6
-      ? res.push(elements[1].value)
-      : (elements[1].style.borderBottom = "1px solid red");
+  const cookies = new Cookies();
 
-    return res;
-  };
-
-  const formHandler = async (e) => {
+  const formHandler = (e) => {
     e.preventDefault();
 
-    const inputs = e.target.querySelectorAll("input");
-    const [email, password] = validationForm(inputs);
-
-    if (email && password) {
+    const getFormData = async () => {
       setLoading(true);
       requests.auth
-        .create(email, password)
+        .create(form.email, form.password)
         .then(({ data }) => {
           const { token } = data;
           cookies.set("token", token, { path: "/" });
           axios.defaults.headers.authorization = `Bearer ${token}`;
           dispatch(actions.auth(token));
           M.toast({ html: "auth succes", classes: "succes" });
-          setLoading(false);
           navigate("/");
         })
         .catch((e) => {
@@ -52,16 +43,26 @@ export const AuthorizationPage = () => {
             html: [...e.response.data.non_field_errors],
             classes: "error",
           });
-          setLoading(false);
         })
         .finally(() => setLoading(false));
-    }
+    };
+    getFormData();
   };
+  useEffect(() => {
+    return () => {
+      setLoading({}); // This worked for me
+    };
+  }, []);
 
   const cleanInputs = (e) => {
     if (e.target.classList.contains(classes.form__input))
       e.target.style.borderBottom = " 1px solid #ccc";
   };
+
+  const setInputValue = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   return isLoading ? (
     <Spinner />
   ) : (
@@ -74,14 +75,27 @@ export const AuthorizationPage = () => {
       >
         <div className={classes.form__title}></div>
         <div className={classes.form__group}>
-          <input className={classes.form__input} required />
+          <input
+            className={classes.form__input}
+            name="email"
+            onChange={setInputValue}
+            value={form.email}
+            required
+          />
           <span className={classes.form__bar}></span>
-          <label>E-mail</label>
+          <label>e-mail</label>
         </div>
         <div className={classes.form__group}>
-          <input className={classes.form__input} required type="password" />
+          <input
+            className={classes.form__input}
+            type="password"
+            name="password"
+            onChange={setInputValue}
+            value={form.password}
+            required
+          />
           <span className={classes.form__bar}></span>
-          <label>Password</label>
+          <label>Пароль</label>
         </div>
         <button className={classes.form__button}>Авторизоваться</button>
       </form>

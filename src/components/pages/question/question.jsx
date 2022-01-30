@@ -38,7 +38,7 @@ export const QuestionPage = () => {
           </div>
         ))}
       </div>
-      <CreateAnswer id={id}/>
+      <CreateAnswer id={id} />
     </div>
   );
 };

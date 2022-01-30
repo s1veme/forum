@@ -17,7 +17,7 @@
       margin-left: 10px;
       cursor: pointer;
       padding: 1px;
-      background-color: #3e7ffe;
+
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -52,4 +52,61 @@
 .menu__wrap {
   display: flex;
   align-items: center;
+}
+
+.modal {
+  z-index: 5;
+  position: fixed;
+  top: 100px;
+  margin-right: 40px;
+  padding: 20px;
+  border-radius: 10px;
+  animation: modal 0.3s forwards;
+  right: 0;
+  filter: drop-shadow(4px 6px 15px rgba(0, 0, 0, 0.25));
+  display: block;
+  background-color: white;
+  &__button {
+    display: block;
+    color: black;
+    margin: 10px 0px;
+    font-size: 15px;
+
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      transition: all 0.3s;
+      color: $buttons;
+    }
+  }
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .user__avatar {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: -35px;
+    right: 10px;
+    border: 20px solid transparent;
+    border-top: 20px solid white;
+    z-index: 1;
+    filter: drop-shadow(-4px -100px 15px rgba(0, 0, 0, 0.25));
+    display: inline-block;
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes modal {
+  0% {
+    margin-top: 50px;
+  }
+  100% {
+    margin-top: inherit;
+  }
 }
