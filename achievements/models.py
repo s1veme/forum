@@ -14,7 +14,7 @@ class Achievement(models.Model):
         blank=True,
         null=True
     )
-    number_question = models.PositiveIntegerField(
+    number_questions = models.PositiveIntegerField(
         blank=True,
         null=True
     )
