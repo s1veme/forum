@@ -41,5 +41,6 @@ class AnswerSerializer(serializers.ModelSerializer):
             'id',
             'content',
             'owner_name',
-            'owner'
+            'owner',
+            'post',
         ]
