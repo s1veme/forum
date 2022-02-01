@@ -53,4 +53,5 @@ uritemplate==4.1.1
 urllib3==1.26.7
 wrapt==1.13.2
 django-imagekit==4.1.0
+pytest>=5.4.0
 drf_yasg
