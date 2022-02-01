@@ -1,12 +1,11 @@
+from rest_framework import status
 from rest_framework.generics import (
     RetrieveAPIView
 )
-
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import User
-
 from .serializer import UserSerializer
 
 
@@ -16,5 +15,11 @@ class UserRetrieveAPIView(RetrieveAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(instance=request.user)
+        if user_id := request.query_params.get('id'):
+            user = User.objects.get_or_none(id=user_id)
+            if not user:
+                return Response('User does not exist', status=status.HTTP_404_NOT_FOUND)
+            serializer = self.get_serializer(instance=user)
+        else:
+            serializer = self.get_serializer(instance=request.user)
         return Response(serializer.data)
