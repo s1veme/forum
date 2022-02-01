@@ -15,22 +15,6 @@ from .models import (
 )
 
 
-class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
-
-    tags = TagListSerializerField()
-
-    class Meta:
-        model = Post
-        fields = [
-            'id',
-            'title',
-            'content',
-            'owner',
-            'tags',
-            'timestamp'
-        ]
-
-
 class AnswerSerializer(serializers.ModelSerializer):
 
     owner_name = serializers.ReadOnlyField(source='owner.username')
@@ -44,3 +28,24 @@ class AnswerSerializer(serializers.ModelSerializer):
             'owner',
             'post',
         ]
+
+
+class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
+
+    tags = TagListSerializerField()
+    answers = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Post
+        fields = [
+            'id',
+            'title',
+            'content',
+            'owner',
+            'tags',
+            'timestamp',
+            'answers',
+        ]
+
+    def get_answers(self, obj):
+       return AnswerSerializer(Answer.objects.filter(post=obj), many=True).data
