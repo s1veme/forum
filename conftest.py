@@ -7,12 +7,17 @@ User = get_user_model()
 
 
 @fixture()
-def create_user():
-    user = User.objects.create(
-        username='test',
-        password='testpassword',
-        email='testemail@gmail.com'
-    )
+def user_data():
+    return {
+        'username': 'test',
+        'password': 'testpassword',
+        'email': 'testemail@gmail.com'
+    }
+
+
+@fixture()
+def create_user(user_data):
+    user = User.objects.create(**user_data)
     user.is_active = True
     user.save()
 
