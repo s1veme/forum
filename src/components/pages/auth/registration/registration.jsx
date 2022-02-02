@@ -11,11 +11,10 @@ export const RegistrationPage = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const test = await requests.user.create({
+      const userData = await requests.user.create({
         ...data,
         preferences: data.preferences.replace(",", "").split(" "),
       });
-      console.log(test);
       M.toast({
         html: "Регистрация успешна, авторизуйтесь",
         classes: "succes",

@@ -9,11 +9,6 @@ import axios from "axios";
 import M from "materialize-css";
 import { Spinner } from "../../../ui-components/Spinner/Spinner";
 
-const validate = {
-  email: "",
-  password: "",
-};
-
 export const AuthorizationPage = () => {
   const [isLoading, setLoading] = useState();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -33,6 +28,7 @@ export const AuthorizationPage = () => {
         .then(({ data }) => {
           const { token } = data;
           cookies.set("token", token, { path: "/" });
+
           axios.defaults.headers.authorization = `Bearer ${token}`;
           dispatch(actions.auth(token));
           M.toast({ html: "auth succes", classes: "succes" });
@@ -50,7 +46,7 @@ export const AuthorizationPage = () => {
   };
   useEffect(() => {
     return () => {
-      setLoading({}); // This worked for me
+      setLoading(null);
     };
   }, []);
 

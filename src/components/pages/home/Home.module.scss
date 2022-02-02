@@ -60,3 +60,38 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .home {
+    display: block;
+    &__title {
+      margin-top: 10px;
+      font-size: 30px;
+    }
+    &__subtitle {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    &__img {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+  .container {
+    margin-top: 10px;
+    padding: 10px;
+  }
+  .cards {
+    margin-top: 50px;
+    display: block;
+    width: 100%;
+    .card {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      &__img {
+        width: 100%;
+      }
+    }
+  }
+}

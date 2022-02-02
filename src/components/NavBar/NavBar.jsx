@@ -5,13 +5,12 @@ import classes from "./NavBar.module.scss";
 import img from "../../assets/images/default_user.png";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Cookies from "universal-cookie";
+
 import { useDispatch } from "react-redux";
 import actions from "../../redux/actions";
 import logo from "../../assets/images/logo.svg";
 import useOnClickOutside from "../../hooks/useOutsideClick";
 export const NavBar = () => {
-  const cookies = new Cookies();
   const [userData, setUserData] = useState();
   const [isLoading, setLoading] = useState();
   const [modal, setOpenModal] = useState(false);
@@ -25,12 +24,21 @@ export const NavBar = () => {
     setOpenModal(true);
   };
 
-  useOnClickOutside(modalRef, () => setOpenModal(false))
+  useOnClickOutside(modalRef, () => setOpenModal(false));
 
-  const logOut = async () => {
-    await dispatch(actions.auth(undefined));
-    await cookies.remove("token");
-    await window.location.reload();
+  const logOut = () => {
+    function deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+    }
+    deleteAllCookies();
+    dispatch(actions.auth(""));
   };
 
   const closeModal = (e) => {
@@ -38,6 +46,7 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
+    setUserData(undefined);
     const getUserData = async () => {
       try {
         setLoading(true);
@@ -65,17 +74,11 @@ export const NavBar = () => {
         </div>
       </NavLink>
       <div className={classes.menu__wrap}>
-        <div className={classes.menu}>
-          <div className={classes.menu__item}>ВОПРОСЫ</div>
-          <NavLink to={"/tape"} className={classes.menu__item}>
-            ЛЕНТА
-          </NavLink>
-          <div className={classes.menu__item}>ПОПУЛЯРНОЕ</div>
-        </div>
+        <div className={classes.menu}></div>
         <div className={classes.user}>
           <div className={classes.modal__wrap}></div>
 
-          <div className={classes.user__name}>
+          <div className={classes.user__name_menu}>
             {userData ? userData.username : ""}
           </div>
 
@@ -107,7 +110,12 @@ export const NavBar = () => {
                     Задать вопрос
                   </NavLink>
                   <div className={classes.modal__button}>Мои вопросы</div>
-                  <div className={classes.modal__button}>Профиль</div>
+                  <NavLink to={"/profile"} className={classes.modal__button}>
+                    Профиль
+                  </NavLink>
+                  <NavLink to={"/tape"} className={classes.modal__button}>
+                    Лента
+                  </NavLink>
                   <div className={classes.modal__button}>Настройки</div>
                   <div className={classes.modal__button} onClick={logOut}>
                     Выйти

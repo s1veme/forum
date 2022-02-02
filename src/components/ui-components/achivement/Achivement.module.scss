@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@600&display=swap");
+.card {
+  min-height: 90px;
+  cursor: pointer;
+  &__front {
+    transform: perspective(600px) rotateX(0deg);
+    &_content {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+    }
+  }
+  &__back {
+    transform: perspective(600px) rotateX(180deg);
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    top: 0;
+    margin-top: -90px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 600;
+  }
+  &__img {
+    height: 50px;
+  }
+  &__front,
+  &__back {
+    min-height: 90px;
+    backface-visibility: hidden;
+    transition: transform 0.3s linear;
+    width: 100%;
+  }
+}
+
+.card.active > .card__front {
+  transform: perspective(600px) rotateX(-180deg);
+}
+.card.active > .card__back {
+  transform: perspective(600px) rotateX(0deg);
+}

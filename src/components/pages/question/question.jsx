@@ -4,24 +4,27 @@ import requests from "../../../api/requests";
 import { Spinner } from "../../ui-components/Spinner/Spinner";
 import classes from "./question.module.scss";
 import parse from "html-react-parser";
-import { CreateAnswer } from "./answer/createAnswer";
+import { CreateAnswer } from "./createAnswer/createAnswer";
+import { Answer } from "../../ui-components/answer/Answer";
+import { Tag } from "../../ui-components/tag/tag";
 export const QuestionPage = () => {
   const id = useParams().id;
   const [questionData, setQuestionData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const getQuestionData = async () => {
+    try {
+      const res = await requests.question.get(id);
+      setQuestionData({ ...res.data, content: parse(res.data.content) });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
-    const getQuestionData = async () => {
-      try {
-        const res = await requests.question.get(id);
-        setQuestionData({ ...res.data, content: parse(res.data.content) });
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     getQuestionData();
   }, [id]);
 
@@ -33,12 +36,16 @@ export const QuestionPage = () => {
       <div className={classes.post__content}>{questionData.content}</div>
       <div className={classes.post__tags}>
         {questionData.tags.map((el, i) => (
-          <div className={classes.post__tag} key={i}>
-            {el}
-          </div>
+          <Tag tag={el} key={i} />
         ))}
       </div>
-      <CreateAnswer id={id} />
+      <div className={classes.answers}>
+        <div className={classes.answers__title}>Ответы:</div>
+        {questionData.answers.map(({ owner_name: name, content, id }) => (
+          <Answer name={name} content={content} key={id} />
+        ))}
+      </div>
+      <CreateAnswer id={id} updateCallback={getQuestionData} />
     </div>
   );
 };

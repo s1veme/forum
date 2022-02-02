@@ -20,16 +20,15 @@ export const CreateQuestion = () => {
         await requests.questions.create({
           ...data,
           content,
-          tags: data.tags.replace(/,/g, "").split(" "),
+          tags: data.tags.split(',')
         })
       ).data;
       M.toast({ html: "Пост успешно создан", classes: "succes" });
       navigate(`/question/${id}`);
     } catch (e) {
-      for(let i in e.response.data){
+      for (let i in e.response.data) {
         M.toast({ html: e.response.data[i], classes: "error" });
       }
-      
     }
   };
   const handleChange = (data) => {
@@ -52,9 +51,7 @@ export const CreateQuestion = () => {
               {...register("title")}
             />
             <span className={classes.form__bar}></span>
-            <label>
-              Задайте вопрос(постарайтесь передать суть вопроса кратко)
-            </label>
+            <label>Задайте вопрос</label>
           </div>
 
           <MyEditor handleChange={handleChange} />

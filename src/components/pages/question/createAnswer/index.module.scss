@@ -1,0 +1,35 @@
+@import "../../../../utils/index.scss";
+.answer {
+  margin-top: 30px;
+  &__title {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    margin-top: 40px;
+    cursor: pointer;
+    padding: 20px 30px;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    background-color: $buttons;
+    border-radius: 10px;
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+}
+
+.not_auth {
+    text-align: center;
+    margin-top: 20px;
+  a {
+    border-bottom: 2px solid rgb(211, 209, 209);
+    &:hover{
+        color: blue;
+    }
+  }
+}

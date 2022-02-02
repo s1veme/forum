@@ -1,0 +1,89 @@
+.user {
+  max-width: 1200px;
+  margin: 0 auto;
+  &__profile {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 30px;
+    justify-content: space-between;
+  }
+  &__text {
+    max-width: 500px;
+    text-align: right;
+
+    &_name {
+      font-size: 50px;
+      font-weight: 600;
+    }
+    &_status {
+      font-size: 20px;
+      margin-top: 20px;
+      color: rgb(122, 122, 122);
+    }
+    &_description {
+      max-width: 80%;
+      font-size: 20px;
+      margin-left: auto;
+      margin-top: 20px;
+    }
+  }
+  &__avatar {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.achivments {
+  margin-top: 140px;
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 1300px) {
+  .user {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .user {
+    padding: 0 20px;
+    &__text {
+      &_name {
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .user {
+    &__profile {
+      display: block;
+      margin: 20px auto;
+    }
+    &__text {
+      text-align: start;
+      &_description {
+        position: relative;
+        margin-top: 10px;
+        margin-left: 0;
+      }
+      &_name {
+        margin-top: 20px;
+      }
+    }
+    &__avatar {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+
+  .achivments {
+    margin-top: 40px;
+    display: block;
+  }
+}

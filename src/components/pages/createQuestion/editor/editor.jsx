@@ -2,21 +2,25 @@ import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
+import propTypes from "prop-types";
 
-export default function MyEditor({ handleChange, ...props }) {
+function MyEditor({ handleChange, ...props }) {
   function uploadAdapter(loader) {
     return {
       upload: () => {
         return new Promise((resolve, reject) => {
-          const body = new FormData();
           loader.file.then((file) => {
+            const body = new FormData();
             body.append("files", file);
             axios
-              .post(`http://127.0.0.1:8000/ckeditor/upload/ `, body)
+              .post(`http://127.0.0.1:8000/ckeditor/upload/ `, body, {
+                headers: {
+                  "Content-type": "multipart/form-data",
+                },
+              })
               .then((res) => {
-                console.log(res)
                 resolve({
-                  default: res,
+                  default: res.url,
                 });
               })
               .catch((err) => {
@@ -50,3 +54,8 @@ export default function MyEditor({ handleChange, ...props }) {
     </div>
   );
 }
+
+MyEditor.propTypes = {
+  handleChange: propTypes.func,
+};
+export default MyEditor;

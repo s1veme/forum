@@ -24,23 +24,33 @@
     color: black;
   }
 
-  &__tag {
-    margin-top: 10px;
-    padding: 3px 0 5px;
-    border-radius: 10px;
-    margin-right: 10px;
-    background-color: rgb(176, 191, 243);
-    padding: 10px;
-    cursor: pointer;
-  }
   &__footer {
     margin-top: 10px;
     display: flex;
     align-items: flex-start;
-
   }
-  &__time {
-    margin-top: 10px;
+  &__data {
     width: 20%;
+  }
+  &__answers {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .question {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .question {
+    &__footer {
+      display: block;
+    }
+    &__data {
+      width: 100%;
+      margin-top: 20px;
+    }
   }
 }

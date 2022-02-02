@@ -21,8 +21,17 @@ export const Questions = () => {
     };
     getPosts();
   }, []);
-  const posts = questions.map(({ title, timestamp, tags, id }) => {
-    return <Question timestamp={timestamp} title={title} tags={tags} id={id} key={id}/>;
+  const posts = questions.map(({ title, timestamp, tags, id, answers }) => {
+    return (
+      <Question
+        timestamp={timestamp}
+        title={title}
+        tags={tags}
+        id={id}
+        key={id}
+        answers={answers}
+      />
+    );
   });
   return !isLoading ? (
     <div className={classes.questions}>{posts}</div>
