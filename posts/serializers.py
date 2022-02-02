@@ -1,13 +1,8 @@
-from django.db import models
 from rest_framework import serializers
-
 from taggit_serializer.serializers import (
     TagListSerializerField,
     TaggitSerializer
 )
-
-from user.serializer import UserSerializer
-from user.models import User
 
 from .models import (
     Answer,
@@ -16,7 +11,6 @@ from .models import (
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-
     owner_name = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
@@ -31,7 +25,6 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
-
     tags = TagListSerializerField()
     answers = serializers.SerializerMethodField()
 
@@ -48,4 +41,4 @@ class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
         ]
 
     def get_answers(self, obj):
-       return AnswerSerializer(Answer.objects.filter(post=obj), many=True).data
+        return AnswerSerializer(Answer.objects.filter(post=obj), many=True).data
