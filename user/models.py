@@ -3,8 +3,6 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin
 )
-from django.core.exceptions import ObjectDoesNotExist
-
 from django.db import models
 from imagekit.models.fields import ProcessedImageField
 from imagekit.processors import ResizeToFill
@@ -36,12 +34,6 @@ class UserManager(BaseUserManager):
         user.save()
 
         return user
-
-    def get_or_none(self, **kwargs):
-        try:
-            return self.get(**kwargs)
-        except ObjectDoesNotExist:
-            return None
 
 
 class User(AbstractBaseUser, PermissionsMixin):

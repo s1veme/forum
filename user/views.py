@@ -16,7 +16,7 @@ class UserRetrieveAPIView(RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         if user_id := request.query_params.get('id'):
-            user = User.objects.get_or_none(id=user_id)
+            user = User.objects.filter(id=user_id).first()
             if not user:
                 return Response('User does not exist', status=status.HTTP_404_NOT_FOUND)
             serializer = self.get_serializer(instance=user)
