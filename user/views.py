@@ -1,10 +1,12 @@
 from rest_framework import status
 from rest_framework.generics import (
-    RetrieveAPIView
+    RetrieveAPIView,
+    UpdateAPIView
 )
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from posts.permissions import IsAuthenticatedAndOwnerOrReadOnly
 from .models import User
 from .serializer import UserSerializer
 
@@ -23,3 +25,12 @@ class UserRetrieveAPIView(RetrieveAPIView):
         else:
             serializer = self.get_serializer(instance=request.user)
         return Response(serializer.data)
+
+
+class UserUpdateAPIView(UpdateAPIView):
+    queryset = User.objects.filter(is_active=True)
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
