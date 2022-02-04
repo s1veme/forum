@@ -12,10 +12,10 @@ from achievements.models import Achievement
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
-        if username is None:
+        if not username:
             raise TypeError('Users must have a username.')
 
-        if email is None:
+        if not email:
             raise TypeError('Users must have an email address.')
 
         user = self.model(username=username, email=self.normalize_email(email))
